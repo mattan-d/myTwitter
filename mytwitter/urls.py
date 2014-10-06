@@ -9,4 +9,5 @@ urlpatterns = patterns('',
     url(r'^$', 'feed.views.home', name='home'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^user/([-\w]+)/$', 'feed.views.user_post', name='user_post'),
+    url(r'^add/$', 'feed.views.add_post', name='add_post')
 )

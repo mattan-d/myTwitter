@@ -7,16 +7,21 @@
 {% block content %}
 
     {% for object in object_list %}
-        <div class="panel panel-primary">
+        <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title"><b>
-                   <a href="{% url 'user_post' object.user.username %}">
-                    {{ object.user.get_full_name }}</a>
-                </b>@<span class="small_time">{{ object.user }} <span class="time">{{ object.published_at|timesince }}</span></h3>
+                   {% if object.user %}
+                   <a href="{% url 'user_post' object.user.username %}">{{ object.user.get_full_name }}</a>
+                   {% else %}anonyfish{% endif %}
+                </b>@<span class="small_time">{{ object.user }} <span title="{{ object.published_at }}" class="time">{{ object.published_at|timesince }}</span></h3>
             </div>
             <div class="panel-body">
-                {{ object.content }} | <span title="{{ object.published_at }}"></span>
+                {{ object.content|linebreaks }}
             </div>
         </div>
     {% endfor %}
+{% endblock %}
+
+{% block page_header %}
+        Home
 {% endblock %}

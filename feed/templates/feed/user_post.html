@@ -1,4 +1,9 @@
 {% extends "_base.html" %}
+
+{% block meta_title %}
+   {{ user_display }}'s tweets
+{% endblock %}
+
 {% block content %}
         <h1><span class="label label-primary btn-primary">{{ user_display }}'s tweets <span class="badge">{{count}}</span></span></h1>
     {% for p in object_list %}

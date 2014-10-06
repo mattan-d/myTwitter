@@ -1,5 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.core.urlresolvers import reverse
+from django.shortcuts import render, get_object_or_404, redirect
+from django import forms
 from feed.models import Post
+from forms import PostForm
 
 def home(request):
     return render(request, "feed/home.html", {
@@ -13,4 +16,20 @@ def user_post(request, username):
         'user_display': username,
         'object_list': Post.objects.filter(user__username=username).all(),
         'count': Post.objects.filter(user__username=username).count(),
+    })
+
+def add_post(request):
+
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid:
+            if request.POST['content']:
+                new_post = form.save(commit=False)
+                new_post.save()
+                return redirect(reverse('home'))
+    else:
+        form = PostForm()
+
+    return render(request, "feed/add_post.html", {
+        'form': form
     })
