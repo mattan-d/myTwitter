@@ -1,0 +1,7 @@
+body {background: url('bg.png') no-repeat #C0DEED}
+a {color: #000;}
+.time:before {content: "\00b7"}
+.small_time {font-size: 12px;}
+
+.nav.nav-stacked {background: #fff; border-radius: 5px;}
+.col-lg-9 {background: #fff; border-radius: 5px;}
