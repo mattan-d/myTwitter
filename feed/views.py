@@ -1,5 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, get_object_or_404, redirect
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django import forms
 from feed.models import Post
 from forms import PostForm
@@ -31,5 +32,32 @@ def add_post(request):
         form = PostForm()
 
     return render(request, "feed/add_post.html", {
-        'form': form
+        'form': form,
+        'active': {
+            'post': 'active'
+        },
+    })
+
+
+def listing(request):
+    obj_list = Post.objects.order_by('-published_at').all()
+    paginator = Paginator(obj_list , 5)
+
+    page = request.GET.get('page')
+    try:
+        list = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        list = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        list = paginator.page(paginator.num_pages)
+
+    return render(request, "feed/home.html", {
+        'object_list': list,
+        'pages': paginator.page_range,
+        'count': obj_list.count,
+        'active': {
+            'home': 'active'
+        },
     })

@@ -6,7 +6,9 @@ urlpatterns = patterns('',
     # url(r'^$', 'mytwitter.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^$', 'feed.views.home', name='home'),
+    url(r'^$', 'feed.views.listing', name='home'),
+    # url(r'^$', 'feed.views.home', name='home'), # this is home without pagination
+
     url(r'^admin/', include(admin.site.urls)),
     url(r'^user/([-\w]+)/$', 'feed.views.user_post', name='user_post'),
     url(r'^add/$', 'feed.views.add_post', name='add_post')

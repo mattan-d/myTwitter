@@ -83,3 +83,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# MIDDLEWARE_CLASSES = (
+#     'django.middleware.cache.UpdateCacheMiddleware',
+#     'django.middleware.common.CommonMiddleware',
+#     'django.middleware.cache.FetchFromCacheMiddleware',
+# )
+#
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+#         'LOCATION': 'c:/myTwitter/mytwitter/cache',
+#         'TIMEOUT': 60,
+#         'OPTIONS': {
+#             'MAX_ENTRIES': 1000
+#         }
+#     }
+# }
